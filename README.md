@@ -2,7 +2,7 @@
 
 A small Windows floating status light for Codex. It shows Codex activity with a traffic-light style desktop widget, so you can leave Codex running in the background and still know whether it is working, waiting for you, ready for review, or idle.
 
-<img src="docs/images/floating-window.png" alt="Codex Traffic Light floating widget" width="360">
+<img src="docs/images/floating-window.png" alt="Codex Traffic Light floating widget" width="280">
 
 ## Highlights
 
