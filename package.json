@@ -1,0 +1,79 @@
+{
+  "name": "codex-traffic-light-windows",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Windows Codex traffic light status monitor",
+  "author": "Codex Traffic Light Contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/peters385/codex-traffic-light-windows#readme",
+  "bugs": {
+    "url": "https://github.com/peters385/codex-traffic-light-windows/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peters385/codex-traffic-light-windows.git"
+  },
+  "keywords": [
+    "codex",
+    "traffic-light",
+    "electron",
+    "windows",
+    "hooks"
+  ],
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "electron .",
+    "dev": "concurrently -k \"npm run dev:vite\" \"wait-on http://localhost:5173 && npm run dev:electron\"",
+    "build": "vite build",
+    "start": "npm run build && electron .",
+    "dist:win": "node scripts/dist-win.cjs"
+  },
+  "dependencies": {
+    "lucide-react": "^1.24.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.0.3",
+    "concurrently": "10.0.3",
+    "electron": "43.1.1",
+    "electron-builder": "26.15.3",
+    "typescript": "7.0.2",
+    "vite": "8.1.5",
+    "wait-on": "9.0.10"
+  },
+  "build": {
+    "appId": "com.codex.traffic-light",
+    "productName": "Codex 红绿灯",
+    "copyright": "Copyright © 2026",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "icon": "electron/assets/app-icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Codex 红绿灯"
+    }
+  }
+}
