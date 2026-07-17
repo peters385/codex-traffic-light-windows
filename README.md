@@ -29,6 +29,10 @@
 
 ![单灯模式](docs/images/single-mode.png)
 
+深色主题下仍保留相同的状态层级和灯光含义。
+
+![深色三灯模式](docs/images/dark-mode.png)
+
 托盘菜单里可以显示/隐藏悬浮窗、重新写入 Codex hooks、查看配置路径、切换开机启动，也可以通过“测试灯光”排查 UI 和状态文件。
 
 ![托盘图标](docs/images/tray-icon.png)
