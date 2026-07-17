@@ -2,7 +2,7 @@
 
 A small Windows floating status light for Codex. It shows Codex activity with a traffic-light style desktop widget, so you can leave Codex running in the background and still know whether it is working, waiting for you, ready for review, or idle.
 
-![Codex Traffic Light floating widget](docs/images/floating-window.png)
+<img src="docs/images/floating-window.png" alt="Codex Traffic Light floating widget" width="360">
 
 ## Highlights
 
@@ -27,11 +27,11 @@ A small Windows floating status light for Codex. It shows Codex activity with a 
 
 After launch, the app stays in the Windows tray and shows a transparent floating status card. In normal use, you do not need to click the lights. They update automatically as Codex state changes.
 
-![Single-light mode](docs/images/single-mode.png)
+<img src="docs/images/single-mode.png" alt="Single-light mode" width="320">
 
 Dark mode keeps the same status hierarchy and light meanings.
 
-![Dark three-light mode](docs/images/dark-mode.png)
+<img src="docs/images/dark-mode.png" alt="Dark three-light mode" width="320">
 
 The tray menu lets you show or hide the floating widget, rewrite Codex hooks, inspect configuration paths, toggle launch at startup, and test the lights for troubleshooting.
 
