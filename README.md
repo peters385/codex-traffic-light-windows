@@ -16,7 +16,7 @@
 ## 下载与安装
 
 1. 打开 GitHub 仓库右侧的 **Releases**。
-2. 下载 `Codex 红绿灯 Setup 0.1.0.exe`。
+2. 下载 `Codex.Setup.0.1.0.exe`。
 3. 双击安装并启动应用。
 4. 在 Codex 中运行 `/hooks`。
 5. 按 Codex 提示信任 `Codex 红绿灯` hooks。
