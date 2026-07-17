@@ -1,54 +1,54 @@
-# Codex 红绿灯 Windows 版
+# Codex Traffic Light for Windows
 
-一个 Windows 桌面悬浮状态灯，用红黄绿灯实时提示 Codex 当前状态。它适合把 Codex 放在后台跑任务时使用：不用一直盯着窗口，也能知道现在是在工作、等待确认、可以验收，还是已经空闲。
+A small Windows floating status light for Codex. It shows Codex activity with a traffic-light style desktop widget, so you can leave Codex running in the background and still know whether it is working, waiting for you, ready for review, or idle.
 
-![Codex 红绿灯悬浮窗](docs/images/floating-window.png)
+![Codex Traffic Light floating widget](docs/images/floating-window.png)
 
-## 功能亮点
+## Highlights
 
-- 黄灯：Codex 正在处理任务。
-- 红灯：Codex 正在等待你确认、授权或回答问题。
-- 绿灯：任务完成，可以验收；保持 10 分钟后自动切到空闲。
-- 全灭：空闲、启动初始状态，或你中途点击了停止。
-- 支持单灯/三灯模式、明暗主题、声音提醒开关、托盘常驻和开机启动开关。
-- 状态自动驱动，悬浮窗里的灯只负责展示，不需要手动点灯。
+- Yellow: Codex is working.
+- Red: Codex is waiting for confirmation, permission, or an answer.
+- Green: the task is complete and ready for review; it automatically returns to idle after 10 minutes.
+- Off: idle, initial startup state, or a task was stopped.
+- Supports single-light and three-light layouts, light/dark themes, sound toggle, tray menu, and optional launch at startup.
+- The widget is display-only during normal use. Status is driven automatically by Codex hooks and local Codex session events.
 
-## 下载与安装
+## Download and Install
 
-1. 打开 GitHub 仓库右侧的 **Releases**。
-2. 下载 `Codex.Setup.0.1.0.exe`。
-3. 双击安装并启动应用。
-4. 在 Codex 中运行 `/hooks`。
-5. 按 Codex 提示信任 `Codex 红绿灯` hooks。
+1. Open **Releases** on this repository.
+2. Download `Codex.Setup.0.1.0.exe`.
+3. Run the installer and start the app.
+4. In Codex, run `/hooks`.
+5. Trust the Codex Traffic Light hooks when Codex asks.
 
-> 当前安装包没有代码签名，Windows 可能显示 SmartScreen 或“未知发布者”提示。这不是程序联网校验失败，而是未签名开源安装包的常见提示。
+> The current installer is not code-signed. Windows may show a SmartScreen or "Unknown publisher" warning. This is expected for an unsigned open-source installer.
 
-## 使用方式
+## Usage
 
-启动后，应用会常驻托盘，并显示一个透明悬浮状态卡片。正常使用时不需要点击灯泡，灯光会跟随 Codex 状态自动变化。
+After launch, the app stays in the Windows tray and shows a transparent floating status card. In normal use, you do not need to click the lights. They update automatically as Codex state changes.
 
-![单灯模式](docs/images/single-mode.png)
+![Single-light mode](docs/images/single-mode.png)
 
-深色主题下仍保留相同的状态层级和灯光含义。
+Dark mode keeps the same status hierarchy and light meanings.
 
-![深色三灯模式](docs/images/dark-mode.png)
+![Dark three-light mode](docs/images/dark-mode.png)
 
-托盘菜单里可以显示/隐藏悬浮窗、重新写入 Codex hooks、查看配置路径、切换开机启动，也可以通过“测试灯光”排查 UI 和状态文件。
+The tray menu lets you show or hide the floating widget, rewrite Codex hooks, inspect configuration paths, toggle launch at startup, and test the lights for troubleshooting.
 
-![托盘图标](docs/images/tray-icon.png)
+![Tray icon](docs/images/tray-icon.png)
 
-## 状态映射
+## Status Mapping
 
-| Codex 事件 | 状态 | 灯 |
+| Codex event | State | Light |
 | --- | --- | --- |
-| `UserPromptSubmit` / `task_started` / 普通运行事件 | `working` | 黄灯 |
-| `PermissionRequest` / `request_user_input` / 计划确认 | `waiting` | 红灯 |
-| `Stop` / `SubagentStop` / 普通 `task_complete` | `done` | 绿灯 |
-| `turn_aborted` / 应用启动 / 绿灯 10 分钟后 | `idle` | 全灭 |
+| `UserPromptSubmit` / `task_started` / normal activity | `working` | Yellow |
+| `PermissionRequest` / `request_user_input` / plan approval | `waiting` | Red |
+| `Stop` / `SubagentStop` / normal `task_complete` | `done` | Green |
+| `turn_aborted` / app startup / 10 minutes after green | `idle` | Off |
 
-## 本地文件
+## Local Files
 
-应用会在本机写入这些文件：
+The app writes these files on your machine:
 
 ```text
 %USERPROFILE%\.codex\bin\codex-light.cmd
@@ -59,7 +59,7 @@
 %APPDATA%\CodexTrafficLight\preferences.json
 ```
 
-状态文件格式：
+State file format:
 
 ```json
 {
@@ -69,9 +69,9 @@
 }
 ```
 
-## 命令行测试
+## Command Line Testing
 
-如果 `%USERPROFILE%\.codex\bin` 在 `PATH` 中，可以直接运行：
+If `%USERPROFILE%\.codex\bin` is in `PATH`, you can run:
 
 ```powershell
 codex-light working
@@ -81,61 +81,61 @@ codex-light idle
 codex-light status
 ```
 
-也可以使用完整路径：
+You can also use the full path:
 
 ```powershell
 & "$env:USERPROFILE\.codex\bin\codex-light.ps1" working
 ```
 
-## 开发
+## Development
 
-需要 Node.js 和 npm。
+Requires Node.js and npm.
 
 ```powershell
 npm install
 npm run dev
 ```
 
-构建前端：
+Build the renderer:
 
 ```powershell
 npm run build
 ```
 
-打包 Windows 安装器：
+Build the Windows installer:
 
 ```powershell
 npm run dist:win
 ```
 
-打包产物会输出到 `release/`。
+The packaged output is written to `release/`.
 
-## 隐私说明
+## Privacy
 
-这个工具只在本机工作：
+This tool works locally:
 
-- 不上传 Codex 对话内容。
-- 不连接第三方状态服务。
-- 只读取本机 Codex hooks 和 session 事件，用来判断灯光状态。
-- 状态和偏好都保存在 `%APPDATA%\CodexTrafficLight`。
+- It does not upload Codex conversation content.
+- It does not connect to a third-party status service.
+- It reads local Codex hooks and session events only to infer light state.
+- State and preferences are stored under `%APPDATA%\CodexTrafficLight`.
 
-## 常见问题
+## FAQ
 
-**安装时提示未知发布者怎么办？**  
-当前版本没有代码签名，Windows 会把安装包标记为未知发布者。确认你是从本仓库 Release 下载后，可以选择继续运行。
+**Why does Windows show an unknown publisher warning?**  
+The current installer is not code-signed, so Windows may mark it as coming from an unknown publisher. If you downloaded it from this repository's Release page, you can choose to continue.
 
-**灯不自动亮怎么办？**  
-先在 Codex 中运行 `/hooks`，确认已经信任 Codex 红绿灯 hooks。也可以右键托盘图标，选择“重新写入 Codex hooks”。
+**Why do the lights not update automatically?**  
+Run `/hooks` in Codex and make sure the Codex Traffic Light hooks are trusted. You can also right-click the tray icon and choose the menu item that rewrites Codex hooks.
 
-**为什么托盘里有“测试灯光”？**  
-这是排查用入口。正常使用时灯光由 Codex 自动驱动，不需要手动切换。
+**Why is there a light testing menu?**  
+It is only for troubleshooting the UI and state file. During normal use, Codex drives the light state automatically.
 
-**点击停止后为什么应该全灭？**  
-点击 Codex 对话里的停止会产生 `turn_aborted` 事件，表示当前轮次不再运行，所以工具会切回 `idle`。
+**Why does the light turn off when I stop a task?**  
+Clicking Stop in a Codex conversation produces a `turn_aborted` event. That means the current turn is no longer running, so the widget returns to `idle`.
 
-**绿灯为什么会自动熄灭？**  
-绿灯代表“本轮完成，可以验收”。为了避免完成状态长期停留，绿灯保持 10 分钟后会自动切到空闲。
+**Why does the green light turn off after a while?**  
+Green means the current turn is complete and ready for review. To avoid leaving a stale completion signal on the desktop, it automatically returns to idle after 10 minutes.
 
-## 许可证
+## License
 
 MIT
